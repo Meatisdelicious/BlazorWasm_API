@@ -21,7 +21,7 @@ namespace BlazorWasm_API.Server
             _products.Add(product);
         }
          
-        public void Delete(string productCode)
+        public void DeleteProduct(string productCode)
         {
             _products.RemoveAll(a => a.ProductCode == productCode);
         }

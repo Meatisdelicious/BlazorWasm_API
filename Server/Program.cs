@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+// dependencies injection
+builder.Services.AddSingleton<ProductService>();
 
 var app = builder.Build();
 
