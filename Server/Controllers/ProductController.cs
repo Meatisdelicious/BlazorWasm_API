@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using BlazorWasm_API.Shared;
+using static BlazorWasm_API.Shared.Product;
 using Microsoft.Build.Tasks.Deployment.Bootstrapper;
 
 namespace BlazorWasm_API.Server.Controllers
@@ -40,6 +40,5 @@ namespace BlazorWasm_API.Server.Controllers
             _productService.DeleteProduct(productCode);
             return Ok();
         }
-        
     }
 }

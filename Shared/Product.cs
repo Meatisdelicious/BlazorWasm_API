@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace BlazorWasm_API.Shared
 {
     [Serializable]
-    internal class Product
+    public class Product
     {
-        public string ProductCode { get; set; }
-        public string ProductName { get; set; } 
+        public string? ProductCode { get; set; }
+        public string? ProductName { get; set; } 
         public int ProductPrice { get; set; }  
     }
 }

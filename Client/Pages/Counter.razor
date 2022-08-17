@@ -1,18 +1,70 @@
 ﻿@page "/counter"
+<!--Importer shared sinon on à pas les variables -->
+@using BlazorWasm_API.Shared
+<!-- Ajouter tout d'aborod le client -->
+@inject HttpClient httpClient;
+
 
 <PageTitle>Counter</PageTitle>
-
 <h1>Counter</h1>
-
 <p role="status">Current count: @currentCount</p>
-
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<br /><br/>
+if (productList !=null && productList.Count != 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Code</td>
+                <td>Price</td>
+                <td>Delete</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var product in productList)
+            {
+                <tr>
+                    <td>@product.ProductName</td>
+                    <td>@product.ProductCode</td>
+                    <td>@product.ProductPrice</td>
+                    <td><button @onclick="async () => {await DeleteProduct(product.ProductCode);}">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <span style="color:red;front-weight:600">No Product to display</span>
+}
+
 
 @code {
     private int currentCount = 0;
 
+    private List<Product>? productList;
+    private Product product = new Product();
+
+    protected override async Task OnInitializedAsync()
+    {
+        productList = await httpClient.GetFromJsonAsync<List<Product>>("api/Product/GetProducts");
+        await base.OnInitializedAsync();
+    }
+    private async Task DeleteProduct(string productCode)
+    {
+        await httpClient.DeleteAsync($"api/product/DeleteProduct?productCode={productCode}");
+        productList = await httpClient.GetFromJsonAsync<List<Product>>("api/Product/getProduct");
+    }
+    private async Task AddProduct()
+    {
+        await httpClient.PostAsJsonAsync<Product>("api/Product/AddProduct", product);
+        productList = await httpClient.GetFromJsonAsync<List<Product>>("api/Product/GetProducts");
+    }
+
     private void IncrementCount()
     {
         currentCount++;
-    }
+    } 
 }

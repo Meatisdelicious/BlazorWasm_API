@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.ResponseCompression;
-
+using BlazorWasm_API.Server;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

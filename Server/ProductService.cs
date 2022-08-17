@@ -1,6 +1,6 @@
-﻿using BlazorWasm_API.Shared;
+﻿
 using Microsoft.Build.Tasks.Deployment.Bootstrapper;
-
+using static BlazorWasm_API.Shared.Product;
 namespace BlazorWasm_API.Server
 {
     public class ProductService
